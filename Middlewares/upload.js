@@ -1,0 +1,19 @@
+const multer = require("multer");
+const path = require('path')
+
+//File_Storage
+const Storage=multer.diskStorage({
+     // File_Path
+    destination: (req,file,cb) =>{
+        cb(null,'public/uploads')
+    },
+    // File_Name
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+//File_Upload
+const upload = multer({storage: Storage,});
+
+module.exports = upload;
